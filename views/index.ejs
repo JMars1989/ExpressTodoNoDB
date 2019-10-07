@@ -1,0 +1,91 @@
+<html>
+
+<head>
+    <title> ToDo App </title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+        integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+</head>
+
+<body>
+    <div class="container">
+        <h2 class="text-center"> A Simple ToDo List App </h2>
+
+        <!-- row to contain both users -->
+        <div class="row">
+
+            <!-- user 1 todolist -->
+            <div class="col-6">
+                <form action="/addtaskUser1" method="POST">
+                    <div class="form-group">
+                        <input type="text" name="newtaskUser1" placeholder="add new task" class="form-control">
+                        <button class="btn btn-primary"> Add Task User 1 </button>
+
+                        <h2 class="pt-2"> Added Task User1 </h2>
+
+                        <% for( var i = 0; i < taskUser1.length; i++){ %>
+                        <li><input type="checkbox" name="checkUser1" value="<%= taskUser1[i] %>" /> <%= taskUser1[i] %>
+                        </li>
+                        <% } %>
+
+                        <button formaction="/removetaskUser1" type="submit" id="top" class="btn btn-primary"> Remove
+                        </button>
+                    </div>
+                </form>
+
+                <h2>User 1 Completed task </h2>
+
+                <% for(var i = 0; i < completeUser1.length; i++){ %>
+                <li><input type="checkbox" checked><%= completeUser1[i] %> </li>
+                <% } %>
+
+            </div>
+
+            <!-- user 2 todolist -->
+            <div class="col-6">
+
+                <form action="/addtaskUser2" method="POST">
+                    <div class="form-group">
+                        <input type="text" name="newtaskUser2" placeholder="add new task" class="form-control">
+                        <button class="btn btn-primary"> Add Task User 2 </button>
+
+                        <h2 class="pt-2"> Added Task User2 </h2>
+
+                        <% for( var i = 0; i < taskUser2.length; i++){ %>
+                        <li><input type="checkbox" name="checkUser2" value="<%= taskUser2[i] %>" /> <%= taskUser2[i] %>
+                        </li>
+                        <% } %>
+
+                        <button formaction="/removetaskUser2" type="submit" id="top" class="btn btn-primary"> Remove
+                        </button>
+                    </div>
+                </form>
+
+                <h2>User 2 Completed task </h2>
+
+                <% for(var i = 0; i < completeUser2.length; i++){ %>
+                <li><input type="checkbox" checked><%= completeUser2[i] %> </li>
+                <% } %>
+
+            </div>
+
+        </div>
+
+
+
+
+
+
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+        integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+        crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
+        integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
+        crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+        integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+        crossorigin="anonymous"></script>
+</body>
+
+</html>

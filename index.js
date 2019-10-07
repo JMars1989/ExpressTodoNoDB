@@ -3,44 +3,71 @@ var bodyParser = require("body-parser");
 var app = express();
 
 app.use(bodyParser.urlencoded({ extended: true }));
-//app.set("view engine", "ejs");
-app.set("view engine", "pug");
+app.set("view engine", "ejs");
+//app.set("view engine", "pug");
 
 app.use(express.static("public"));
 
 //placeholders for added task
-var task = ["Mow the grass", "Go for a run"];
+var taskUser1 = ["Mow the grass", "Go for a run"];
+var taskUser2 = ["Go to class", "Bike ride"];
 //placeholders for removed task
-var complete = ["finish refactor"];
+var completeUser1 = ["Finish refactor"];
+var completeUser2 = ["Schedule meeting"];
 
 //render the ejs and display added task, completed task
 app.get("/", function(req, res) {
-    res.render("index", { task: task, complete: complete });
+    res.render("index", { taskUser1: taskUser1, completeUser1: completeUser1, taskUser2: taskUser2, completeUser2: completeUser2  });
 });
 
-//post route for adding new task 
-app.post("/addtask", function(req, res) {
-    var newTask = req.body.newtaskytask;
+//post route for adding new task to User1
+app.post("/addtaskUser1", function(req, res) {
+    var newTask = req.body.newtaskUser1;
     //add the new task from the post route
-    task.push(newTask);
+    taskUser1.push(newTask);
     res.redirect("/");
 });
 
-app.post("/removetask", function(req, res) {
-    var completeTask = req.body.check;
+//post route for adding new task to User1
+app.post("/addtaskUser2", function(req, res) {
+    var newTask = req.body.newtaskUser2;
+    //add the new task from the post route
+    taskUser2.push(newTask);
+    res.redirect("/");
+});
+
+app.post("/removetaskUser1", function(req, res) {
+    var completeTask = req.body.checkUser1;
     //check for the "typeof" the different completed task, then add into the complete task
     if (typeof completeTask === "string") {
-        complete.push(completeTask);
+        completeUser1.push(completeTask);
         //check if the completed task already exits in the task when checked, then remove it
-        task.splice(task.indexOf(completeTask), 1);
+        taskUser1.splice(taskUser1.indexOf(completeTask), 1);
     } else if (typeof completeTask === "object") {
         for (var i = 0; i < completeTask.length; i++) {
-            complete.push(completeTask[i]);
-            task.splice(task.indexOf(completeTask[i]), 1);
+            completeUser1.push(completeTask[i]);
+            taskUser1.splice(taskUser1.indexOf(completeTask[i]), 1);
         }
     }
     res.redirect("/");
 });
+
+app.post("/removetaskUser2", function(req, res) {
+    var completeTask = req.body.checkUser2;
+    //check for the "typeof" the different completed task, then add into the complete task
+    if (typeof completeTask === "string") {
+        completeUser2.push(completeTask);
+        //check if the completed task already exits in the task when checked, then remove it
+        taskUser2.splice(taskUser2.indexOf(completeTask), 1);
+    } else if (typeof completeTask === "object") {
+        for (var i = 0; i < completeTask.length; i++) {
+            completeUser2.push(completeTask[i]);
+            taskUser2.splice(taskUser2.indexOf(completeTask[i]), 1);
+        }
+    }
+    res.redirect("/");
+});
+
 
 //set app to listen on port 3000
 app.listen(3000, function() {
